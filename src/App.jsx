@@ -5,7 +5,7 @@ import { useState } from "react";
 
 function App() {
 
-  let projectContent = <p>Welcome!!</p>
+  
 
   const [content, setContent] = useState();
 
@@ -13,7 +13,7 @@ function App() {
   setContent(project)
  }
 
-
+ 
 
   return (
     
@@ -22,7 +22,7 @@ function App() {
         <Sidebar onProjectClick={handleProjectClick} />
       </div>
       <div className="w-2/3">
-        <Contents project = {content} />
+        <Contents chosenProject = {content} />
       </div>
     </div>
     

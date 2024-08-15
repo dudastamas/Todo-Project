@@ -1,14 +1,14 @@
-export default  function Contents ({project}){
-    if(!project){
+export default  function Contents ({chosenProject}){
+    if(!chosenProject){
         return <p>Choose Project!</p>
     }
 
     return(
         <div>
-            <h2 className="text-2xl font-bold mb-4">{project.name}</h2>
-            <p>{project.description}</p>
+            <h2 className="text-2xl font-bold mb-4">{chosenProject.name}</h2>
+            <p>{chosenProject.description}</p>
             <ul>
-                {project.tasks.map((task) => <li>{task.title}</li>)}
+                {chosenProject.tasks.map((task) => <li key = {task.id}>{task.title}</li>)}
             </ul>
         </div>
     )
