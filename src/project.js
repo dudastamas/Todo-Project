@@ -1,4 +1,4 @@
-const projects = [
+export const  PROJECTS = [
   {
     id: 1,
     name: "Learning React",
