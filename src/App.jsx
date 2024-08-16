@@ -1,33 +1,35 @@
-import Sidebar from "./Components/Sidebar";
-import Contents from "./Components/Contents.jsx";
+import React, { useState } from 'react';
+import Sidebar from './Components/Sidebar';
+import Content from './Components/Content';
 
-import { useState } from "react";
+const App = () => {
+  const [projects, setProjects] = useState([]);
+  const [selectedProjectId, setSelectedProjectId] = useState(null);
 
-function App() {
+  const handleProjectSelect = (projectId) => {
+    setSelectedProjectId(projectId);
+  };
 
-  
+  const handleAddProject = (newProject) => {
+    setProjects([...projects, newProject]);
+  };
 
-  const [content, setContent] = useState();
-
- function handleProjectClick(project){
-  setContent(project)
- }
-
- 
+  const selectedProject = projects.find(project => project.id === selectedProjectId);
 
   return (
-    
-    <div className="flex">
-         <div className="w-1/3 bg-[#4B2E2E] h-screen flex flex-col items-center justify-center">
-        <Sidebar onProjectClick={handleProjectClick} />
+    <div style={{ display: 'flex' }}>
+      <div className="w-1/3 bg-[#4B2E2E] h-screen">
+        <Sidebar projects={projects} onProjectSelect={handleProjectSelect} />
       </div>
-      <div className="w-2/3">
-        <Contents chosenProject = {content} />
+      <div>
+         <Content 
+        onAddProject={handleAddProject} 
+        selectedProject={selectedProject} 
+      />
       </div>
+     
     </div>
-    
-  
   );
-}
+};
 
 export default App;
