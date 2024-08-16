@@ -1,15 +1,43 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ProjectForm from './ProjectForm';
 import ProjectDetails from './ProjectDetails';
 
-const Content = ({ onAddProject, selectedProject }) => {
+const Content = ({ 
+  onAddProject, 
+  onAddTask, 
+  onEditTask, 
+  onDeleteTask, 
+  selectedProject 
+}) => {
+
+  const handleAddNewTask = (task) => {
+    if (selectedProject) {
+      onAddTask(selectedProject.id, task);
+    }
+  };
+
+  const handleEditTask = (taskId, updatedTask) => {
+    if (selectedProject) {
+      onEditTask(selectedProject.id, taskId, updatedTask);
+    }
+  };
+
+  const handleDeleteTask = (taskId) => {
+    if (selectedProject) {
+      onDeleteTask(selectedProject.id, taskId);
+    }
+  };
+
   return (
-    <div>
+    <div className="p-4 flex-1">
       <ProjectForm onAddProject={onAddProject} />
-      {selectedProject ? (
-        <ProjectDetails project={selectedProject} />
-      ) : (
-        <p>Please select a project to view its details.</p>
+      {selectedProject && (
+        <ProjectDetails 
+          project={selectedProject} 
+          onAddTask={handleAddNewTask}
+          onEditTask={handleEditTask}
+          onDeleteTask={handleDeleteTask}
+        />
       )}
     </div>
   );
