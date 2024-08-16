@@ -18,7 +18,7 @@ const App = () => {
 
   return (
     <div style={{ display: 'flex' }}>
-      <div className="w-1/3 bg-[#4B2E2E] h-screen">
+      <div className="w-1/3 bg-[#4B2E2E] h-screen flex flex-col justify-center items-center p-4">
         <Sidebar projects={projects} onProjectSelect={handleProjectSelect} />
       </div>
       <div>
