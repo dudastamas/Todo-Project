@@ -3,9 +3,9 @@ import { v4 as uuidv4 } from 'uuid';
 
 export default function ProjectForm({onAddProject})  {
 
-    const nameRef = useRef();
+    const projectNameRef = useRef();
     const dateRef = useRef();
-    const descriptionRef = useRef()
+    const taskRef = useRef()
 
     
     function onhandleSubmit(e){
@@ -13,9 +13,9 @@ export default function ProjectForm({onAddProject})  {
         const newProject = 
              {
                 id: uuidv4(),
-                name: nameRef.current.value,
+                projectName: projectNameRef.current.value,
                 date: dateRef.current.value,
-                descriptionRef: descriptionRef.current.value
+                task: taskRef.current.value
 
             }
         
@@ -26,7 +26,7 @@ export default function ProjectForm({onAddProject})  {
     <form onSubmit={onhandleSubmit}>
         <div>
             <label htmlFor='projectName'>Project neve:</label>
-            <input type="text" id='projectName' ref={nameRef}/>
+            <input type="text" id='projectName' ref={projectNameRef}/>
         </div>
         <div>
             <label htmlFor='projectName'>Project neve:</label>
@@ -34,7 +34,7 @@ export default function ProjectForm({onAddProject})  {
         </div>
         <div>
             <label htmlFor='projectName'>Project neve:</label>
-            <input type="text" id='projectName' ref={descriptionRef}/>
+            <input type="text" id='projectName' ref={taskRef}/>
         </div>
         <button type="submit">Küldés</button>
     </form>

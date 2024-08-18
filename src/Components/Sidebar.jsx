@@ -7,7 +7,7 @@ export default function Sidebar({projects}) {
       
         {projects.map((project) =>  
         <button className="py-2 px-4 hover:bg-gray-800 cursor-pointer rounded" key={project.id}>
-          {project.name}
+          {project.projectName}
         </button>
         )}
       
