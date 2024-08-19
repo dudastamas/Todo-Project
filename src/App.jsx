@@ -4,17 +4,26 @@ import Content from './Components/Content';
 
 const App = () => {
 
-  const [projects, setProjects] = useState([])
+  const [projects, setProjects] = useState([]);
+  const [selectedProjectId, setSelectedProjectId] = useState(null);
+
+  let foundedProject = projects.find(project => project.id === selectedProjectId)
+
+
+  function handleProjectId (getProjectId){
+    setSelectedProjectId(getProjectId);
+  }
 
   function handleProjects (newProject){
-    setProjects((prevProject => 
-      [...prevProject, newProject]
+    setProjects((prevProjects => 
+      [...prevProjects, newProject]
     ))
   }
   return(
     <div className='flex'>
-      <Sidebar  projects={projects}/>
-      <Content projects={projects} onAddProject={handleProjects}/>
+      <Sidebar  projects={projects} onGetProjectId={handleProjectId}/>
+      <Content project={foundedProject} onAddProject={handleProjects}/>
+
     </div>
     
   )
