@@ -20,7 +20,13 @@ export default function ProjectForm({onAddProject})  {
             }
         
             onAddProject(newProject);
-    }
+    
+            projectNameRef.current.value="";
+            dateRef.current.value="";
+            taskRef.current.value="";
+    
+        }
+
      
   return(
     <form onSubmit={onhandleSubmit}>
