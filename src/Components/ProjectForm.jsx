@@ -1,50 +1,50 @@
-import React, { useRef } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import React, { useRef } from "react";
+import { v4 as uuidv4 } from "uuid";
 
-export default function ProjectForm({onAddProject})  {
+const ProjectForm = ({ onAddProject }) => {
+  const projectNameRef = useRef(null);
+  const taskRef = useRef(null);
+  const dateRef = useRef(null);
 
-    const projectNameRef = useRef();
-    const dateRef = useRef();
-    const taskRef = useRef()
+  const handleAddProject = (event) => {
+    event.preventDefault();
 
-    
-    function onhandleSubmit(e){
-        e.preventDefault();
-        const newProject = 
-             {
-                id: uuidv4(),
-                projectName: projectNameRef.current.value,
-                date: dateRef.current.value,
-                task: taskRef.current.value
+    const newProject = {
+      id: uuidv4(),
+      projectName: projectNameRef.current.value,
+      tasks: [
+        {
+          id: uuidv4(),
+          taskName: taskRef.current.value,
+          date: dateRef.current.value,
+        },
+      ],
+    };
 
-            }
-        
-            onAddProject(newProject);
-    
-            projectNameRef.current.value="";
-            dateRef.current.value="";
-            taskRef.current.value="";
-    
-        }
+    onAddProject(newProject);
 
-     
-  return(
-    <form onSubmit={onhandleSubmit}>
-        <div>
-            <label htmlFor='projectName'>Project neve:</label>
-            <input type="text" id='projectName' ref={projectNameRef}/>
-        </div>
-        <div>
-            <label htmlFor='projectName'>Project neve:</label>
-            <input type="date" id='projectName' ref={dateRef}/>
-        </div>
-        <div>
-            <label htmlFor='projectName'>Project neve:</label>
-            <input type="text" id='projectName' ref={taskRef}/>
-        </div>
-        <button type="submit">Küldés</button>
+    projectNameRef.current.value = "";
+    taskRef.current.value = "";
+    dateRef.current.value = "";
+  };
+
+  return (
+    <form onSubmit={handleAddProject}>
+      <div>
+        <label htmlFor="projectName">Project Name:</label>
+        <input type="text" id="projectName" ref={projectNameRef} required />
+      </div>
+      <div>
+        <label htmlFor="task">Task:</label>
+        <input type="text" id="task" ref={taskRef} required />
+      </div>
+      <div>
+        <label htmlFor="date">Date:</label>
+        <input type="date" id="date" ref={dateRef} required />
+      </div>
+      <button type="submit">Add Project</button>
     </form>
-  )
+  );
 };
 
-
+export default ProjectForm;

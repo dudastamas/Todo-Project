@@ -1,21 +1,45 @@
-import React, { useState } from 'react';
-import ProjectForm from './ProjectForm';
-import ProjectDetails from './ProjectDetails';
+import React, { useState } from "react";
+import ProjectForm from "./ProjectForm";
+import TaskList from "./TaskList";
 
-export default function Content({project, onAddProject,  }) {
+const Content = ({
+  onAddProject,
+  onAddTask,
+  onEditTask,
+  onDeleteTask,
+  selectedProject,
+}) => {
+  const handleAddNewTask = (task) => {
+    if (selectedProject) {
+      onAddTask(selectedProject.id, task);
+    }
+  };
 
-  
-    return (
-        <div className="flex-1 bg-white h-screen p-8">
-          <ProjectForm onAddProject={onAddProject}/>
-          {project &&(
-            <div>
-            <p>Task: {project.task}</p>
-            <p>Date: {project.date}</p>
-          </div>)}
-        </div>
-      );
-  
+  const handleEditTask = (taskId, updatedTask) => {
+    if (selectedProject) {
+      onEditTask(selectedProject.id, taskId, updatedTask);
+    }
+  };
+
+  const handleDeleteTask = (taskId) => {
+    if (selectedProject) {
+      onDeleteTask(selectedProject.id, taskId);
+    }
+  };
+
+  return (
+    <div className="p-4 flex-1">
+      <ProjectForm onAddProject={onAddProject} />
+      {selectedProject && (
+        <TaskList
+          project={selectedProject}
+          onAddTask={handleAddNewTask}
+          onEditTask={handleEditTask}
+          onDeleteTask={handleDeleteTask}
+        />
+      )}
+    </div>
+  );
 };
 
-
+export default Content;
