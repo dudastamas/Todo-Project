@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const ProjectDetails = ({ project, onAddTask, onEditTask, onDeleteTask }) => {
+const TaskList = ({ project, onAddTask, onEditTask, onDeleteTask }) => {
   const [newTaskName, setNewTaskName] = useState("");
   const [newTaskDate, setNewTaskDate] = useState("");
   const [isEditing, setIsEditing] = useState(null); // Task szerkesztési állapot kezelése
@@ -111,4 +111,4 @@ const ProjectDetails = ({ project, onAddTask, onEditTask, onDeleteTask }) => {
   );
 };
 
-export default ProjectDetails;
+export default TaskList;
