@@ -2,9 +2,13 @@ import React from "react";
 
 const Sidebar = ({ projects, projectId }) => {
   return (
-    <div>
+    <div className="flex flex-col space-y-4 w-full max-w-md mx-auto h-screen justify-center">
       {projects.map((project) => (
-        <button key={project.id} onClick={() => projectId(project.id)}>
+        <button
+          className=""
+          key={project.id}
+          onClick={() => projectId(project.id)}
+        >
           {project.name}
         </button>
       ))}

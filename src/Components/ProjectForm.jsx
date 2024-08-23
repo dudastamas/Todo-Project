@@ -17,10 +17,7 @@ const ProjectForm = ({ onAddProject }) => {
 
   return (
     <div>
-      <form
-        onSubmit={addNewProject}
-        className="flex flex-col space-y-4 w-full max-w-md mx-auto h-screen justify-center"
-      >
+      <form onSubmit={addNewProject} className="flex flex-col ">
         <label htmlFor="text">New Project</label>
         <input type="text" ref={projectNameRef} />
         <button type="submit">Add Project</button>
