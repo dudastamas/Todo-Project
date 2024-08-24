@@ -4,30 +4,37 @@ import Content from "./Components/Content";
 
 const App = () => {
   const [projects, setProjects] = useState([]);
-  const [getProject, setGetProject] = useState();
-  
-  const chosenProject = projects.find((project) => project.id === getProject);
+  const [selectedProjectId, setSelectedProjectId] = useState(null);
+  const [tasks, setTasks] = useState([]);
+
+  const selectedProject = projects.find(
+    (project) => project.id === selectedProjectId
+  );
 
   function addProject(newProject) {
     setProjects((prevProjectList) => [...prevProjectList, newProject]);
   }
 
-  function handleProjectId(projectId) {
-    setGetProject(projectId);
-    
+  function handleProjectSelect(projectId) {
+    setSelectedProjectId(projectId);
   }
 
-   
-console.log(typeof(chosenProject));
-   
+  function addNewTask(newTask) {
+    setTasks((prevNewTask) => [...prevNewTask, newTask]);
+  }
 
   return (
     <div className="flex flex-row">
       <div className="w-1/4 bg-[#603808]">
-        <Sidebar projects={projects} projectId={handleProjectId} />
+        <Sidebar projects={projects} onProjectSelect={handleProjectSelect} />
       </div>
       <div className="flex flex-col space-y-4 w-full max-w-md mx-auto h-screen justify-center">
-        <Content onAddProject={addProject} project={chosenProject} />
+        <Content
+          onAddProject={addProject}
+          selectedProject={selectedProject}
+          onAddNewTask={addNewTask}
+          tasks={tasks}
+        />
       </div>
     </div>
   );

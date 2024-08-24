@@ -1,11 +1,11 @@
 import React, { useState, useRef } from "react";
 import { v4 as uuidv4 } from "uuid";
 
-const TaskList = ({ project, onAddNewTask }) => {
+const TaskList = ({ project, onAddNewTask, tasks }) => {
   const taskNameRef = useRef();
   const taskDateRef = useRef();
 
-  function addNewTask(e) {
+  function handleAddNewTask(e) {
     e.preventDefault();
 
     const taskName = taskNameRef.current.value;
@@ -15,24 +15,36 @@ const TaskList = ({ project, onAddNewTask }) => {
       id: uuidv4(),
       name: taskName,
       date: taskDate,
+      projectId: project.id,
     };
 
     onAddNewTask(newTask);
+    taskNameRef.current.value = "";
+    taskDateRef.current.value = "";
   }
-
-  <div>
-    <form onSubmit={addNewTask}>
-      <div>
-        <label htmlFor="text">Task name</label>
-        <input type="text" ref={taskNameRef} />
-      </div>
-      <div>
-        <label htmlFor="text">Project's name</label>
-        <input type="date" ref={taskDateRef} />
-      </div>
-      <button type="submit">Add Task</button>
-    </form>
-  </div>;
+  return (
+    <div>
+      <h3>Add new task for {project.name}</h3>
+      <ul>
+        {tasks.map((task) => (
+          <li key={task.id}>
+            {task.name} Date: {task.date}
+          </li>
+        ))}
+      </ul>
+      <form onSubmit={handleAddNewTask}>
+        <div>
+          <label htmlFor="text">Task name</label>
+          <input type="text" id="taskName" ref={taskNameRef} />
+        </div>
+        <div>
+          <label htmlFor="text">Date</label>
+          <input type="date" id="taskDate" ref={taskDateRef} />
+        </div>
+        <button type="submit">Add Task</button>
+      </form>
+    </div>
+  );
 };
 
 export default TaskList;
