@@ -5,7 +5,8 @@ const TaskList = ({
   selectedProject,
   onAddNewTask,
   tasks,
-  onShowAddnewProject,
+  onDelete,
+  onEditTask,
 }) => {
   const taskNameRef = useRef();
   const taskDateRef = useRef();
@@ -27,6 +28,10 @@ const TaskList = ({
     taskNameRef.current.value = "";
     taskDateRef.current.value = "";
   }
+
+  // const handleDeleteTask = (taskId) => {
+  //   onDelete(taskId);
+  // };
   return (
     <div className="object-fit bg-[#7f4f24] p-4 flex flex-col space-y-2 items-center justify-center">
       <h3 className="text-white text-xl font-bold">
@@ -36,6 +41,8 @@ const TaskList = ({
         {tasks.map((task) => (
           <li key={task.id}>
             {task.name} Date: {task.date}
+            <button onClick={() => onDelete(task.id)}>Delete</button>
+            <button onClick={() => onEditTask(task.id)}>Edit</button>
           </li>
         ))}
       </ul>

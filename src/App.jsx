@@ -29,6 +29,10 @@ const App = () => {
     setShowProjectForm(true);
   }
 
+  function handleDeleteTask(taskId) {
+    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
+  }
+
   return (
     <div className="flex flex-row">
       <div className="w-1/4 ">
@@ -46,6 +50,7 @@ const App = () => {
           onAddNewTask={addNewTask}
           tasks={tasks}
           onShowAddnewProject={showProjectForm}
+          onDelete={handleDeleteTask}
         />
       </div>
     </div>

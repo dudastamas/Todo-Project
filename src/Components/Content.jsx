@@ -7,6 +7,7 @@ const Content = ({
   onAddNewTask,
   tasks,
   onShowAddnewProject,
+  onDelete,
 }) => {
   return (
     <>
@@ -17,6 +18,7 @@ const Content = ({
           selectedProject={selectedProject}
           onAddNewTask={onAddNewTask}
           tasks={tasks.filter((task) => task.projectId === selectedProject.id)}
+          onDelete={onDelete}
         />
       )}
     </>
