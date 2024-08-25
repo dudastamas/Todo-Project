@@ -6,6 +6,7 @@ const App = () => {
   const [projects, setProjects] = useState([]);
   const [selectedProjectId, setSelectedProjectId] = useState(null);
   const [tasks, setTasks] = useState([]);
+  const [showProjectForm, setShowProjectForm] = useState();
 
   const selectedProject = projects.find(
     (project) => project.id === selectedProjectId
@@ -17,16 +18,26 @@ const App = () => {
 
   function handleProjectSelect(projectId) {
     setSelectedProjectId(projectId);
+    setShowProjectForm(false);
   }
 
   function addNewTask(newTask) {
     setTasks((prevNewTask) => [...prevNewTask, newTask]);
   }
 
+  function handleShowProjectForm() {
+    setShowProjectForm(true);
+  }
+
   return (
     <div className="flex flex-row">
-      <div className="w-1/4 bg-[#603808]">
-        <Sidebar projects={projects} onProjectSelect={handleProjectSelect} />
+      <div className="w-1/4 ">
+        <Sidebar
+          projects={projects}
+          onProjectSelect={handleProjectSelect}
+          textButton="Add new Project"
+          onShowAddnewProject={handleShowProjectForm}
+        />
       </div>
       <div className="flex flex-col space-y-4 w-full max-w-md mx-auto h-screen justify-center">
         <Content
@@ -34,6 +45,7 @@ const App = () => {
           selectedProject={selectedProject}
           onAddNewTask={addNewTask}
           tasks={tasks}
+          onShowAddnewProject={showProjectForm}
         />
       </div>
     </div>

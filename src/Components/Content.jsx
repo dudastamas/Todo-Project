@@ -1,24 +1,23 @@
 import ProjectForm from "./ProjectForm";
 import TaskList from "./TaskList";
 
-const Content = ({ selectedProject, onAddProject, onAddNewTask, tasks }) => {
+const Content = ({
+  selectedProject,
+  onAddProject,
+  onAddNewTask,
+  tasks,
+  onShowAddnewProject,
+}) => {
   return (
     <>
-      <ProjectForm onAddProject={onAddProject} />
-      {selectedProject ? (
-        <>
-          <h2 key={selectedProject.id}>{selectedProject.name}</h2>
-
-          <TaskList
-            project={selectedProject}
-            onAddNewTask={onAddNewTask}
-            tasks={tasks.filter(
-              (task) => task.projectId === selectedProject.id
-            )}
-          />
-        </>
+      {!selectedProject || onShowAddnewProject ? (
+        <ProjectForm onAddProject={onAddProject} />
       ) : (
-        <p>Select a project</p>
+        <TaskList
+          selectedProject={selectedProject}
+          onAddNewTask={onAddNewTask}
+          tasks={tasks.filter((task) => task.projectId === selectedProject.id)}
+        />
       )}
     </>
   );

@@ -16,11 +16,26 @@ const ProjectForm = ({ onAddProject }) => {
   };
 
   return (
-    <div>
-      <form onSubmit={addNewProject} className="flex flex-col ">
-        <label htmlFor="text">New Project</label>
-        <input type="text" ref={projectNameRef} />
-        <button type="submit">Add Project</button>
+    <div className="h-60 bg-[#7f4f24] p-4 flex items-center justify-center">
+      <form
+        onSubmit={addNewProject}
+        className="flex flex-col space-y-6 w-full max-w-md"
+      >
+        <label className="mx-auto text-white text-xl font-bold" htmlFor="text">
+          Project Name
+        </label>
+        <input
+          className="rounded-lg h-10"
+          type="text"
+          ref={projectNameRef}
+          required
+        />
+        <button
+          type="submit"
+          className="mx-auto text-white text-lg bg-[#432818] px-4  py-2 rounded-md "
+        >
+          Add Project
+        </button>
       </form>
     </div>
   );
