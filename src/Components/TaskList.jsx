@@ -8,14 +8,18 @@ const TaskList = ({
   onDelete,
   onEditTask,
 }) => {
-  const taskNameRef = useRef();
-  const taskDateRef = useRef();
+  const [editiTaskId, setEditingTaskId] = useState(null);
+
+  const newTaskNameRef = useRef();
+  const newTaskDateRef = useRef();
+  const editTaskNameRef = useRef();
+  const editTaskDateRef = useRef();
 
   function handleAddNewTask(e) {
     e.preventDefault();
 
-    const taskName = taskNameRef.current.value;
-    const taskDate = taskDateRef.current.value;
+    const taskName = newTaskNameRef.current.value;
+    const taskDate = newTaskDateRef.current.value;
 
     const newTask = {
       id: uuidv4(),
@@ -25,13 +29,20 @@ const TaskList = ({
     };
 
     onAddNewTask(newTask);
-    taskNameRef.current.value = "";
-    taskDateRef.current.value = "";
+    newTaskNameRef.current.value = "";
+    newTaskDateRef.current.value = "";
   }
 
-  // const handleDeleteTask = (taskId) => {
-  //   onDelete(taskId);
-  // };
+  function handleEditTask(e, taskId) {
+    e.preventDefault();
+    const updateTask = {
+      name: editTaskNameRef.current.value,
+      date: editTaskDateRef.current.value,
+    };
+    onEditTask(taskId, updateTask);
+    setEditingTaskId(null);
+  }
+
   return (
     <div className="object-fit bg-[#7f4f24] p-4 flex flex-col space-y-2 items-center justify-center">
       <h3 className="text-white text-xl font-bold">
@@ -40,12 +51,33 @@ const TaskList = ({
       <ul>
         {tasks.map((task) => (
           <li key={task.id}>
-            {task.name} Date: {task.date}
-            <button onClick={() => onDelete(task.id)}>Delete</button>
-            <button onClick={() => onEditTask(task.id)}>Edit</button>
+            {editiTaskId === task.id ? (
+              <form onSubmit={(e) => handleEditTask(e, task.id)}>
+                <input
+                  type="text"
+                  defaultValue={task.name}
+                  ref={editTaskNameRef}
+                />
+                <input
+                  type="date"
+                  defaultValue={task.date}
+                  ref={editTaskDateRef}
+                />
+                <button type="submit">Save</button>
+                <button onClick={() => setEditingTaskId(null)}>Cancel</button>
+              </form>
+            ) : (
+              <>
+                {task.name} Date: {task.date}
+                <button onClick={() => onDelete(task.id)}>Delete</button>
+                <button onClick={() => setEditingTaskId(task.id)}>Edit</button>
+              </>
+            )}
           </li>
         ))}
       </ul>
+
+      {/****** * Add New Task ********* */}
       <form
         className="flex flex-col space-y-6 w-full max-w-md"
         onSubmit={handleAddNewTask}
@@ -61,7 +93,7 @@ const TaskList = ({
             className="rounded-lg h-10"
             type="text"
             id="taskName"
-            ref={taskNameRef}
+            ref={newTaskNameRef}
             required
           />
         </div>
@@ -76,7 +108,7 @@ const TaskList = ({
             className="rounded-lg h-10"
             type="date"
             id="taskDate"
-            ref={taskDateRef}
+            ref={newTaskDateRef}
             required
           />
         </div>

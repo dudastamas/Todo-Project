@@ -33,6 +33,14 @@ const App = () => {
     setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
   }
 
+  function editTask(taskId, updateTask) {
+    setTasks((prevTasks) =>
+      prevTasks.map((task) =>
+        task.id === taskId ? { ...task, ...updateTask } : task
+      )
+    );
+  }
+
   return (
     <div className="flex flex-row">
       <div className="w-1/4 ">
@@ -51,6 +59,7 @@ const App = () => {
           tasks={tasks}
           onShowAddnewProject={showProjectForm}
           onDelete={handleDeleteTask}
+          editTask={editTask}
         />
       </div>
     </div>
