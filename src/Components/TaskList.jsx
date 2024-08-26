@@ -114,7 +114,7 @@ const TaskList = ({
         </div>
         <button
           className="mx-auto text-white text-medium bg-[#432818] px-4  py-2 rounded-md "
-          type="submit"
+          type="submit  "
         >
           Add Task
         </button>
