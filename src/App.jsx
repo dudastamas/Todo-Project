@@ -43,7 +43,7 @@ const App = () => {
 
   return (
     <div className="flex flex-row">
-      <div className="w-1/4 ">
+      <div className="w-1/5 ">
         <Sidebar
           projects={projects}
           onProjectSelect={handleProjectSelect}
@@ -51,7 +51,7 @@ const App = () => {
           onShowAddnewProject={handleShowProjectForm}
         />
       </div>
-      <div className="flex flex-col space-y-4 w-full max-w-md mx-auto h-screen justify-center">
+      <div className="flex flex-col space-y-4 w-full max-w-screen-md	 mx-auto h-screen justify-center">
         <Content
           onAddProject={addProject}
           selectedProject={selectedProject}

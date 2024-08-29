@@ -48,7 +48,7 @@ const TaskList = ({
       <h3 className="text-white text-xl font-bold">
         Add new task for {selectedProject.name}
       </h3>
-      <ul>
+      <ul className="w-full">
         {tasks.map((task) => (
           <li key={task.id}>
             {editiTaskId === task.id ? (
@@ -67,11 +67,19 @@ const TaskList = ({
                 <button onClick={() => setEditingTaskId(null)}>Cancel</button>
               </form>
             ) : (
-              <>
-                {task.name} Date: {task.date}
-                <button onClick={() => onDelete(task.id)}>Delete</button>
-                <button onClick={() => setEditingTaskId(task.id)}>Edit</button>
-              </>
+              <div className="flex flex-col space-y-6 my-2 py-2 px-8  rounded-lg bg-[#432818] ">
+                <div className="flex flex-col space-y-2 text-white">
+                  <p>Task: {task.name}</p>
+                  <p>Date: {task.date}</p>
+                </div>
+
+                <div className="flex flex-row justify-between">
+                  <button onClick={() => setEditingTaskId(task.id)}>
+                    Edit
+                  </button>
+                  <button onClick={() => onDelete(task.id)}>Delete</button>
+                </div>
+              </div>
             )}
           </li>
         ))}
@@ -96,8 +104,8 @@ const TaskList = ({
             ref={newTaskNameRef}
             required
           />
-        </div>
-        <div className="flex flex-col space-y-2 mx-auto w-full max-w-md">
+          {/* </div>
+        <div className="flex flex-col space-y-2 mx-auto w-full max-w-md"> */}
           <label
             className="mx-auto text-white text-medium font-bold"
             htmlFor="text"
