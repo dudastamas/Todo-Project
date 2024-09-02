@@ -17,25 +17,31 @@ const Sidebar = ({
           {textButton}
         </button>
       </div>
-      <div>
-        <ul className="flex flex-col space-y-4 items-center ">
-          {projects.map((project) => (
-            <li
-              className="space-y-4 flex flex-col items-center"
-              key={project.id}
-            >
-              <h3 className="text-white text-3xl mb-8">Projects:</h3>
-              <button
-                className="text-[#e7ecef]  bg-[#936639] py-2 px-6 hover:bg-[#99582a]
+      <div className="flex justify-center">
+        {projects.length <= 0 ? (
+          <h3 className="text-white text-2xl mb-8 ">Please Add project</h3>
+        ) : (
+          <div className="flex flex-col">
+            <h3 className="text-white text-2xl mb-8 ">Projects:</h3>
+            <ul className="flex flex-col space-y-4 items-center ">
+              {projects.map((project) => (
+                <li
+                  className="space-y-4 flex flex-col items-center"
+                  key={project.id}
+                >
+                  <button
+                    className="text-[#e7ecef]  bg-[#936639] py-2 px-6 hover:bg-[#99582a]
           text-lg rounded-md"
-                key={project.id}
-                onClick={() => onProjectSelect(project.id)}
-              >
-                {project.name}
-              </button>
-            </li>
-          ))}
-        </ul>
+                    key={project.id}
+                    onClick={() => onProjectSelect(project.id)}
+                  >
+                    {project.name}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     </div>
   );
