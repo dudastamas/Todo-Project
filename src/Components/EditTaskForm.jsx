@@ -26,26 +26,41 @@ const EditTaskList = ({ tasks, onDelete, onEditTask }) => {
                 open
               >
                 <form
-                  className="felx flex-col  space-y-4 "
+                  className="felx flex-col"
                   onSubmit={(e) => handleEditTask(e, task.id)}
                 >
-                  <div>
-                    <input
-                      type="text"
-                      defaultValue={task.name}
-                      ref={editTaskNameRef}
-                    />
+                  <div className="mb-8 space-y-4">
+                    <div>
+                      <input
+                        className=" border-2 p-1 border-[#99582a] rounded-md"
+                        type="text"
+                        defaultValue={task.name}
+                        ref={editTaskNameRef}
+                      />
+                    </div>
+                    <div>
+                      <input
+                        className=" border-2 p-1 border-[#99582a] rounded-md w-full"
+                        type="date"
+                        defaultValue={task.date}
+                        ref={editTaskDateRef}
+                      />
+                    </div>
                   </div>
-                  <div>
-                    <input
-                      type="date"
-                      defaultValue={task.date}
-                      ref={editTaskDateRef}
-                    />
-                  </div>
-                  <div className="flex justify-between">
-                    <button type="submit">Save</button>
-                    <button onClick={() => setEditingTaskId(null)}>
+
+                  <div className="flex justify-between mt-10">
+                    <button
+                      className="text-[#e7ecef]  bg-[#936639] py-1 px-4 hover:bg-[#99582a]
+          text-lg rounded-md"
+                      type="submit"
+                    >
+                      Save
+                    </button>
+                    <button
+                      className="text-[#e7ecef]  bg-[#936639] py-1 px-4 hover:bg-[#99582a]
+          text-lg rounded-md"
+                      onClick={() => setEditingTaskId(null)}
+                    >
                       Cancel
                     </button>
                   </div>
